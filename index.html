@@ -3,201 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Royal Wedding | أحمد وسارة</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@200;400;700&family=Reem+Kufi:wght@500&family=Great+Vibes&display=swap" rel="stylesheet">
+    <title>دعوة زفاف ملكية</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;600;700&family=Reem+Kufi&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --gold: radial-gradient(ellipse dotted at center, #f3e5ab 0%, #d4af37 50%, #8c7326 100%);
-            --gold-text: #d4af37;
-            --deep-black: #0a0a0b;
+            --gold: #d4af37;
+            --light-gold: #f3e5ab;
+            --dark-bg: #0a0a0a;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            overflow: hidden; background: var(--deep-black);
-            font-family: 'Cairo', sans-serif; color: #fff;
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* لمنع التمرير العشوائي */
         }
 
-        /* خلفية متحركة فخمة */
-        .bg-animate {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #0f0f10 0%, #1a1a1c 100%);
+        /* الخلفية الرخامية الفخمة */
+        .background-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://www.transparenttextures.com/patterns/dark-matter.png');
             z-index: -1;
         }
 
-        .gold-dust {
-            position: absolute; width: 100%; height: 100%;
-            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.3; animation: drift 20s infinite linear;
+        /* كارت الدعوة الرئيسي */
+        .card {
+            width: 90%;
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 25px;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            animation: fadeInScale 1.2s ease-out forwards;
         }
 
-        @keyframes drift { from { background-position: 0 0; } to { background-position: 500px 500px; } }
-
-        /* حاوية المحتوى الرئيسي */
-        .invitation-frame {
-            height: 100vh; display: flex; justify-content: center; align-items: center;
-            perspective: 2000px; padding: 20px;
-        }
-
-        /* الكارت الملكي */
-        .royal-card {
-            width: 100%; max-width: 400px; height: 85vh;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 40px 0 40px 0; /* تصميم زوايا غير متماثل فخم */
-            position: relative; overflow: hidden;
-            display: flex; flex-direction: column; align-items: center;
-            padding: 40px 25px; text-align: center;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            transform-style: preserve-3d;
-            animation: card-reveal 2s cubic-bezier(0.2, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes card-reveal {
-            from { opacity: 0; transform: scale(0.8) rotateY(30deg); }
-            to { opacity: 1; transform: scale(1) rotateY(0deg); }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         /* الزخارف الذهبية */
-        .corner-ornament {
-            position: absolute; width: 80px; filter: sepia(1) brightness(1.2); opacity: 0.6;
-        }
-        .top-right { top: 10px; right: 10px; transform: rotate(90deg); }
-        .bottom-left { bottom: 10px; left: 10px; transform: rotate(-90deg); }
-
-        /* شعار العروسين */
-        .monogram {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4rem; color: var(--gold-text);
-            margin-bottom: 20px; position: relative;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-        }
-
-        .monogram::after {
-            content: ""; position: absolute; bottom: -5px; left: 25%; width: 50%;
-            height: 1px; background: var(--gold);
+        .ornament {
+            width: 80px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 5px var(--gold));
         }
 
         .quran-verse {
-            font-family: 'Amiri', serif; font-size: 1.1rem;
-            color: #ccc; line-height: 1.8; margin-bottom: 30px;
-            opacity: 0; animation: fade-up 1s forwards 0.8s;
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--light-gold);
+            margin-bottom: 25px;
         }
 
-        .wedding-title {
-            font-family: 'Reem Kufi', sans-serif; font-size: 1.4rem;
-            color: var(--gold-text); letter-spacing: 2px;
-            opacity: 0; animation: fade-up 1s forwards 1.1s;
+        .invitation-header {
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
         .names {
-            font-family: 'Amiri', serif; font-size: 3.2rem;
-            font-weight: 700; color: #fff; margin: 10px 0;
-            opacity: 0; animation: fade-up 1s forwards 1.4s;
+            font-family: 'Amiri', serif;
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--gold);
+            line-height: 1.2;
+            margin: 15px 0;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
         }
 
-        .and { font-family: 'Great Vibes', cursive; color: var(--gold-text); font-size: 2rem; }
-
-        /* تفاصيل الوقت والمكان */
-        .event-details {
-            margin-top: auto; width: 100%;
-            opacity: 0; animation: fade-up 1s forwards 1.7s;
+        .and-icon {
+            font-size: 1.5rem;
+            display: block;
+            color: #fff;
+            opacity: 0.8;
         }
 
-        .detail-item {
-            background: rgba(255, 255, 255, 0.05);
-            margin: 10px 0; padding: 15px; border-radius: 15px;
-            border-left: 3px solid var(--gold-text);
+        .info-section {
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 0.5px solid rgba(212, 175, 55, 0.3);
         }
 
-        .detail-item p { margin: 0; font-size: 0.95rem; }
-        .gold-label { color: var(--gold-text); font-weight: bold; display: block; margin-bottom: 5px; }
-
-        .location-btn {
-            background: var(--gold-text); color: #000;
-            width: 100%; padding: 15px; border-radius: 12px;
-            text-decoration: none; font-weight: 700; display: block;
-            margin-top: 15px; transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        .info-section p {
+            margin: 5px 0;
+            font-size: 1.1rem;
         }
 
-        @keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* تأثير اللمعان الذي يمر على الكارت */
-        .shine {
-            position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: skewX(-20deg); animation: sweep 5s infinite;
+        .label {
+            display: block;
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 5px;
         }
-        @keyframes sweep { 0% { left: -100%; } 50% { left: 150%; } 100% { left: 150%; } }
+
+        .btn-map {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), #8c7326);
+            color: #000;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-map:active {
+            transform: scale(0.95);
+        }
+
+        .footer-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="bg-animate">
-        <div class="gold-dust"></div>
-    </div>
+    <div class="background-overlay"></div>
 
-    <div class="invitation-frame">
-        <div class="royal-card" id="tilt-card">
-            <div class="shine"></div>
-            
-            <img src="https://cdn-icons-png.flaticon.com/512/1012/1012117.png" class="corner-ornament top-right">
-            <img src="https://cdn-icons-png.flaticon.com/512/1012/1012117.png" class="corner-ornament bottom-left">
+    <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1012/1012117.png" class="ornament" alt="Ornament">
 
-            <div class="monogram">A & S</div>
+        <p class="quran-verse">
+            بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ <br>
+            "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا"
+        </p>
 
-            <p class="quran-verse">
-                "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَهُم مَّوَدَّةً وَرَحْمَةً"
-            </p>
+        <h2 class="invitation-header">نتشرف بدعوتكم لحضور حفل زفاف</h2>
 
-            <h2 class="wedding-title">حفل زفاف ملكي</h2>
-            
-            <div class="names">
-                أحمد <br>
-                <span class="and">&</span> <br>
-                سارة
-            </div>
-
-            <div class="event-details">
-                <div class="detail-item">
-                    <span class="gold-label">التاريخ والتوقيت</span>
-                    <p>الجمعة، 27 مارس 2025 | 8:00 مساءً</p>
-                </div>
-                
-                <div class="detail-item">
-                    <span class="gold-label">المكان</span>
-                    <p>فندق نايل ريتز كارلتون - القاهرة</p>
-                </div>
-
-                <a href="http://googleusercontent.com/maps.google.com/4" target="_blank" class="location-btn">
-                    📍 خريطة الموقع
-                </a>
-            </div>
+        <div class="names">
+            أحمد 
+            <span class="and-icon">&</span>
+            سارة
         </div>
+
+        <div class="info-section">
+            <span class="label">الزمان</span>
+            <p>الجمعة، 27 مارس 2025</p>
+            <p>الساعة 8:00 مساءً</p>
+            
+            <hr style="border: 0.1px solid rgba(255,255,255,0.1); margin: 15px 0;">
+            
+            <span class="label">المكان</span>
+            <p>فندق نايل ريتز كارلتون - القاهرة</p>
+            <p style="font-size: 0.9rem; opacity: 0.8;">قاعة ألف ليلة وليلة</p>
+            
+            <a href="https://maps.app.goo.gl/95u63" target="_blank" class="btn-map">
+                📍 عرض موقع القاعة
+            </a>
+        </div>
+
+        <p class="footer-text">دامت دياركم بالأفراح عامرة</p>
     </div>
 
-    <script>
-        // تأثير التفاعل مع حركة الموبايل (الجيروسكوب البصري)
-        const card = document.getElementById('tilt-card');
-        
-        document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.pageX) / 25;
-            const y = (window.innerHeight / 2 - e.pageY) / 25;
-            card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-        });
-
-        // دعم التفاعل باللمس للموبايل
-        document.addEventListener('touchmove', (e) => {
-            const touch = e.touches[0];
-            const x = (window.innerWidth / 2 - touch.pageX) / 30;
-            const y = (window.innerHeight / 2 - touch.pageY) / 30;
-            card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-        }, { passive: true });
-    </script>
 </body>
 </html>
