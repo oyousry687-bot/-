@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>دعوة زفاف ملكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark-gold: #8c7326;
+            --white: #ffffff;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* --- 1. الظرف الخارجي (The Envelope) --- */
+        #envelope-wrapper {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #1a1a1a; /* لون الظرف الداكن */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s;
+            cursor: pointer;
+        }
+
+        .envelope-content {
+            text-align: center;
+            color: var(--gold);
+        }
+
+        .seal {
+            width: 100px;
+            height: 100px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #1a1a1a;
+            border: 4px double #1a1a1a;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); box-shadow: 0 0 30px var(--gold); }
+            100% { transform: scale(1); }
+        }
+
+        .tap-text {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* حركات إغلاق الظرف */
+        .envelope-opened {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* --- 2. محتوى الدعوة الرئيسي --- */
+        .main-container {
+            width: 100%; height: 100vh;
+            background: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .card {
+            width: 85%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            border: 2px solid var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            z-index: 10;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 1s ease 0.5s;
+        }
+
+        .show-card {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .ornament-top { width: 60px; filter: sepia(1); margin-bottom: 10px; }
+
+        .quran-text {
+            font-family: 'Amiri', serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .names {
+            font-family: 'Amiri', serif;
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--dark-gold);
+            margin: 10px 0;
+        }
+
+        .and {
+            font-family: 'Great Vibes', cursive;
+            display: block;
+            font-size: 1.8rem;
+            margin: -10px 0;
+            color: var(--gold);
+        }
+
+        .details {
+            margin: 20px 0;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .details p { margin: 5px 0; font-weight: 600; font-size: 1.1rem; }
+
+        .btn-location {
+            display: block;
+            background: var(--dark-gold);
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 50px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        /* --- 3. تأثير الورد المتساقط (اختياري للفخامة) --- */
+        .petal {
+            position: absolute;
+            background-color: #ffc0cb; /* لون بتلات الورد */
+            border-radius: 150% 0 150% 0;
+            opacity: 0.3;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="envelope-wrapper" onclick="openInvitation()">
+        <div class="envelope-content">
+            <div class="seal">A & S</div>
+            <p class="tap-text">إضغط لفتح الدعوة</p>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="overlay"></div>
+        
+        <div class="card" id="main-card">
+            <img src="https://cdn-icons-png.flaticon.com/512/3132/3132688.png" class="ornament-top">
+            
+            <p class="quran-text">
+                "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا"
+            </p>
+
+            <div class="names">
+                أحمد 
+                <span class="and">&</span>
+                سارة
+            </div>
+
+            <div class="details">
+                <p>الجمعة، 27 مارس 2025</p>
+                <p>الساعة 8:00 مساءً</p>
+                <hr style="border: 0.2px solid var(--gold); width: 50%;">
+                <p style="font-size: 1rem;">فندق ريتز كارلتون - القاهرة</p>
+                <a href="https://maps.google.com" target="_blank" class="btn-location">📍 موقع القاعة</a>
+            </div>
+
+            <p style="font-family: 'Amiri', serif; font-size: 1.2rem; color: var(--dark-gold);">فرحتنا تكتمل بكم..</p>
+        </div>
+    </div>
+
+    <script>
+        // وظيفة فتح الدعوة
+        function openInvitation() {
+            // إخفاء الظرف
+            document.getElementById('envelope-wrapper').classList.add('envelope-opened');
+            // إظهار الكارت بحركة
+            document.getElementById('main-card').classList.add('show-card');
+            
+            // تشغيل تأثير البتلات المتساقطة
+            createPetals();
+        }
+
+        // إنشاء بتلات ورد تتساقط لمزيد من الانبهار
+        function createPetals() {
+            for (let i = 0; i < 20; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.width = Math.random() * 10 + 5 + 'px';
+                petal.style.height = petal.style.width;
+                petal.style.animationDuration = Math.random() * 3 + 2 + 's';
+                petal.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(petal);
+            }
+        }
+    </script>
+</body>
+</html>
